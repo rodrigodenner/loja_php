@@ -1,0 +1,12 @@
+{
+    "name": "rodrigo/loja_php",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App"
+        }
+    },
+    "require": {
+        "symfony/var-dumper": "^7.0",
+        "twig/twig": "^3.8"
+    }
+}
