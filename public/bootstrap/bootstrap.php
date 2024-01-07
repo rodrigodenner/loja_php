@@ -1,8 +1,27 @@
 <?php
+use App\Classes\Template;
+use App\Controllers\Controller;
+use App\Controllers\Method;
 
-$controller = new \App\Controllers\Controller;
-$object = $controller->controller();
+$template = new Template;
+$twig = $template->init();
 
-$method = new \App\Controllers\Method;
+/**
+ * Chamando o controller pela url
+ */
+$callController = new Controller;
+$colledController = $callController->controller();
+$controller = new $colledController();
+$controller->setTwig($twig);
 
-dump($method->Method($object));
+/**
+ * Chamando o metodo pela url
+ */
+$callMethod = new Method;
+$method = $callMethod->method($controller);
+
+
+/**
+ * Chamando o controller e o methodo pela url
+ */
+$controller->$method();

@@ -6,6 +6,7 @@ class ProdutoController
 {
   public function index()
   {
-
+    dump('Index do controller');
   }
+
 }

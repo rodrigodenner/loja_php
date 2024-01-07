@@ -12,7 +12,7 @@ class Uri
 
   public function emptyUri()
   {
-    return ($this->uri =='/')? true : false;
+    return ($this->uri =='/') ? true : false;
   }
 
   public function getUri()
