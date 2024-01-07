@@ -7,23 +7,33 @@ use App\Classes\Uri;
 class Controller
 {
   const NAMESPACE_CONTROLLER = '\\App\\Controllers\\';
-  const FOLDERS_CONTROLLER = ['Site','Admin'];
+  const FOLDERS_CONTROLLER = ['Site', 'Admin'];
   const ERROR_CONTROLLER = '\\App\\Controllers\\Error\\ErrorController';
 
-  private $controller;
   private $uri;
 
   public function __construct()
   {
-    $this->uri = New Uri;
+    $this->uri = new Uri;
   }
 
-  public function getController()
+  private function getController()
   {
     if (!$this->uri->emptyUri()) {
       $explodedUri = array_filter(explode('/', $this->uri->getUri()));
       return (!empty($explodedUri[1]) ? ucfirst($explodedUri[1]) . 'Controller' : null);
     }
-    return ucfirst(DEFAULT_CONTROLLER).'Controller';
+    return ucfirst(DEFAULT_CONTROLLER) . 'Controller';
+  }
+
+  public function controller()
+  {
+    $controller = $this->getController();
+    foreach (self::FOLDERS_CONTROLLER as $folderController) {
+      if (class_exists(self::NAMESPACE_CONTROLLER . $folderController . '\\' . $controller)) {
+        return self::NAMESPACE_CONTROLLER . $folderController . '\\' . $controller;
+      }
+    }
+    return self::ERROR_CONTROLLER;
   }
 }
