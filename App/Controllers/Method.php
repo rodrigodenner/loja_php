@@ -16,7 +16,7 @@ class Method
   {
     if (!$this->uri->emptyUri()) {
       $explodedUri = array_filter(explode('/', $this->uri->getUri()));
-      return (isset($explodedUri[2])) ? $explodedUri[2] : DEFAULT_METHOD;
+      return (isset($explodedUri[2])) ? $explodedUri[2] : null;
     }
   }
 
@@ -26,6 +26,5 @@ class Method
       return $this->getMethod();
     }
     return DEFAULT_METHOD;
-
   }
 }
