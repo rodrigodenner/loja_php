@@ -6,6 +6,6 @@ class ProdutoController
 {
   public function index()
   {
-    
+
   }
 }
