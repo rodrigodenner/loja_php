@@ -1,4 +1,6 @@
 <?php
+
+use App\Classes\Parameters;
 use App\Classes\Template;
 use App\Controllers\Controller;
 use App\Controllers\Method;
@@ -14,6 +16,7 @@ $colledController = $callController->controller();
 $controller = new $colledController();
 $controller->setTwig($twig);
 
+
 /**
  * Chamando o metodo pela url
  */
@@ -24,4 +27,6 @@ $method = $callMethod->method($controller);
 /**
  * Chamando o controller e o methodo pela url
  */
-$controller->$method();
+$parameters = new Parameters;
+$parameter = $parameters->getParameterMethod($controller,$method);
+$controller->$method($parameter);

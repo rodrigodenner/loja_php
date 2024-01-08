@@ -10,14 +10,14 @@ class Controller
   const FOLDERS_CONTROLLER = ['Site', 'Admin'];
   const ERROR_CONTROLLER = '\\App\\Controllers\\Error\\ErrorController';
 
-  private $uri;
+  private Uri $uri;
 
   public function __construct()
   {
-    $this->uri = new Uri;
+    $this->uri = new Uri();
   }
 
-  private function getController()
+  private function getController(): ?string
   {
     if (!$this->uri->emptyUri()) {
       $explodedUri = array_filter(explode('/', $this->uri->getUri()));
@@ -26,12 +26,13 @@ class Controller
     return ucfirst(DEFAULT_CONTROLLER) . 'Controller';
   }
 
-  public function controller()
+  public function controller(): BaseController|string
   {
     $controller = $this->getController();
     foreach (self::FOLDERS_CONTROLLER as $folderController) {
-      if (class_exists(self::NAMESPACE_CONTROLLER . $folderController . '\\' . $controller)) {
-        return self::NAMESPACE_CONTROLLER . $folderController . '\\' . $controller;
+      $controllerClass = self::NAMESPACE_CONTROLLER . $folderController . '\\' . $controller;
+      if (class_exists($controllerClass) && is_subclass_of($controllerClass, BaseController::class)) {
+        return $controllerClass;
       }
     }
     return self::ERROR_CONTROLLER;

@@ -1,12 +1,18 @@
 <?php
 
 namespace App\Controllers\Site;
+use App\Controllers\BaseController;
 
-class ProdutoController
+class ProdutoController extends BaseController
+
 {
-  public function index()
+  public function index(): void
   {
-    dump('Index do controller');
+    dump('produto');
   }
 
+  public function calca($parameters): void
+  {
+    dump($parameters);
+  }
 }

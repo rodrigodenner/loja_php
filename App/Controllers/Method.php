@@ -6,7 +6,7 @@ use App\Classes\Uri;
 
 class Method
 {
-  private $uri;
+  private Uri $uri;
   public function __construct()
   {
     $this->uri = new Uri;
@@ -18,6 +18,7 @@ class Method
       $explodedUri = array_filter(explode('/', $this->uri->getUri()));
       return (isset($explodedUri[2])) ? $explodedUri[2] : null;
     }
+    return null;
   }
 
   public function method($object)

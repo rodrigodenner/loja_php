@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 class BaseController
 {
-  protected $twig;
+  protected mixed $twig;
 
-  public function setTwig($twig)
+  public function setTwig($twig): void
   {
     $this->twig = $twig;
   }
