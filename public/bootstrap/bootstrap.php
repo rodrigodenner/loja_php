@@ -1,12 +1,17 @@
 <?php
 
+use App\Classes\FunctionsTwig;
 use App\Classes\Parameters;
 use App\Classes\Template;
 use App\Controllers\Controller;
 use App\Controllers\Method;
 
+
 $template = new Template;
 $twig = $template->init();
+
+$functionsTwig = new FunctionsTwig;
+$functionsTwig->siteUrl($twig);
 
 /**
  * Chamando o controller pela url
